@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect
-from store_app.models import Product,Images,Brand,Categories,Color,Filter_Price,Contact_Us 
+from store_app.models import Product,Images,Brand,Categories,Color,Filter_Price,Contact_Us,Order,OrderItem 
 from django.conf import settings
 from django.core.mail import send_mail 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
-
+from django.views.decorators.csrf import csrf_exempt
 def BASE(request):
     return  render(request, 'Main/base.html')    
 def HOME(request):
@@ -183,3 +183,88 @@ def cart_clear(request):
 @login_required(login_url="/login/")
 def cart_detail(request):
     return render(request, 'Cart/cart_details.html')
+
+
+def Check_out(request):
+    amount_str=request.POST.get('amount')   
+    amount_float=float(amount_str)
+    amount=int(amount_float)
+    return render(request, 'Cart/checkout.html')
+
+def PLACE_ORDER(request):
+    if request.method=='POST':
+        uid=request.session.get('_auth_user_id')
+        user=User.objects.get(id=uid)
+        cart=request.session.get('cart')
+
+        firstname=request.POST.get('firstname')
+        lastname=request.POST.get('lastname')
+
+        country=request.POST.get('country')
+        address=request.POST.get('address')
+        city=request.POST.get('city')
+        state=request.POST.get('state')
+        postcode=request.POST.get('postcode')
+        phone=request.POST.get('phone')
+        email=request.POST.get('email')
+        amount=request.POST.get('amount')
+
+        order_id=request.POST.get('order_id')
+        payment=request.POST.get('payment')        
+        
+        order=Order(
+            user=user,
+            firstname=firstname,
+            lastname=lastname,
+            country=country,
+            city=city,
+            address=address,
+            state=state,
+            postcode=postcode,
+            phone=phone,
+            email=email,
+            payment_id=order_id,
+            amount=amount,
+            )
+        
+        order.save()
+
+        for i in cart:
+            a=int(cart[i]['price'])
+            b=cart[i]['quantity']
+            total=a*b
+            item=OrderItem( 
+                user=user,
+                order=order,
+                product=cart[i]['name'],
+                image=cart[i]['image'],
+                quantity=cart[i]['quantity'],
+                price=cart[i]['price'],
+                total=total,
+            )
+            item.save()
+
+        return render(request, 'Cart/placeorder.html') 
+
+@csrf_exempt
+def SUCCESS(request):
+    if request.method=='POST':
+        a=request.POST
+        order_id=''
+        for key,value in a.items():
+            if key=='razorpay_payment_id':
+                order_id=value
+                break
+        order=Order.objects.filter(payment_id=order_id)
+        order.paid=True
+        order.save()
+    return render(request, 'Cart/thank-you.html')
+
+def Your_Order(request):
+    uid=request.session.get('_auth_user_id')
+    user=User.objects.get(id=uid)
+    order=OrderItem.objects.filter(user=user)
+    contex={
+        'order':order
+    }
+    return render(request, 'Main/your_order.html',contex)

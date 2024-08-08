@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
 class Categories(models.Model):
     name=models.CharField(max_length=200)
@@ -89,3 +90,36 @@ class Contact_Us(models.Model):
     def __str__(self):
         return self.email
     
+
+class Order(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    firstname=models.CharField(max_length=200)
+    lastname=models.CharField(max_length=200)
+    country=models.CharField(max_length=200)
+    address=models.TextField()
+    city=models.CharField(max_length=200)
+    state=models.CharField(max_length=200)
+    postcode=models.CharField(max_length=200)
+    email=models.EmailField()
+    phone=models.IntegerField() 
+
+    amount=models.IntegerField()
+    payment_id=models.CharField(max_length=200, null=True, blank=True)
+    paid=models.BooleanField(default=False, null=True)
+    date=models.DateField(default='datetime.date.today')   
+    
+    def __str__(self):
+        return self.user.username
+    
+class OrderItem(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
+    order=models.ForeignKey(Order,on_delete=models.CASCADE)
+    product=models.CharField(max_length=123)
+    image=models.ImageField(upload_to='Product_images/Order_Img')
+    quantity=models.CharField(max_length=123)
+    price=models.CharField(max_length=123)
+    total=models.CharField(max_length=1203)
+
+    def __str__(self):
+        return self.order.user.username
