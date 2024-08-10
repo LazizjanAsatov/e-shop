@@ -10,55 +10,23 @@
                     <!-- Swiper -->
                     <div class="swiper-container zoom-top">
                         <div class="swiper-wrapper">
+                    
                             <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/1.webp" alt="">
-                                <a class="venobox full-preview" data-gall="myGallery" href="assets/images/product-image/zoom-image/1.webp">
+                                <img class="img-responsive m-auto" src="{{prod.image.url}}" alt="">
+                                <a class="venobox full-preview" data-gall="myGallery" src="{{prod.image.url}}">
                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/2.webp" alt="">
-                                <a class="venobox full-preview" data-gall="myGallery" href="assets/images/product-image/zoom-image/2.webp">
-                                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/3.webp" alt="">
-                                <a class="venobox full-preview" data-gall="myGallery" href="assets/images/product-image/zoom-image/3.webp">
-                                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/4.webp" alt="">
-                                <a class="venobox full-preview" data-gall="myGallery" href="assets/images/product-image/zoom-image/4.webp">
-                                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/5.webp" alt="">
-                                <a class="venobox full-preview" data-gall="myGallery" href="assets/images/product-image/zoom-image/5.webp">
-                                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="swiper-container mt-20px zoom-thumbs slider-nav-style-1 small-nav">
                         <div class="swiper-wrapper">
+                           
                             <div class="swiper-slide">
                                 <img class="img-responsive m-auto" src="assets/images/product-image/small-image/1.webp" alt="">
                             </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/small-image/2.webp" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/small-image/3.webp" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/small-image/4.webp" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="img-responsive m-auto" src="assets/images/product-image/small-image/5.webp" alt="">
-                            </div>
+                            
                         </div>
                         <!-- Add Arrows -->
                         <div class="swiper-buttons">
@@ -105,12 +73,11 @@
                         <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                             <span>Tags: </span>
                             <ul class="d-flex">
+                                {%for i in prod.tag_set.all%}
                                 <li>
-                                    <a href="#">Smart Device, </a>
+                                    <a href="#">{{i.name}} </a>
                                 </li>
-                                <li>
-                                    <a href="#">Phone</a>
-                                </li>
+                                {%endfor%}
                             </ul>
                         </div>
                         <div class="pro-details-quality">
@@ -118,8 +85,7 @@
                                 <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                             </div>
                             <div class="pro-details-cart">
-                                <button class="add-cart"> Add To
-                                    Cart</button>
+                                <button class="add-cart"> Add To Cart</button>
                             </div>
                             <div class="pro-details-compare-wishlist pro-details-wishlist ">
                                 <a href="wishlist.html"><i class="pe-7s-like"></i></a>
@@ -140,10 +106,7 @@
                             <div id="des-details2" class="tab-pane">
                                 <div class="product-anotherinfo-wrapper text-start">
                                     <ul>
-                                        <li><span>Weight</span> 400 g</li>
-                                        <li><span>Dimensions</span>10 x 10 x 15 cm</li>
-                                        <li><span>Materials</span> 60% cotton, 40% polyester</li>
-                                        <li><span>Other Info</span> American heirloom jean shorts pug seitan letterpress</li>
+                                        <li>{{prod.information}}</li>
                                     </ul>
                                 </div>
                             </div>

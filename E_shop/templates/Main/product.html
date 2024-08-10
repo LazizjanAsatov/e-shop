@@ -58,9 +58,9 @@
                                                         <span class="new">{{prod.condition}}</span>
                                                         </span>
                                                         <div class="thumb">
-                                                            <a href="single-product.html" class="image">
-                                                                <img src="/{{prod.image}}" alt="Product" />
-                                                                <img class="hover-image" src="/{{prod.image.url}}" alt="Product" />
+                                                            <a href="{% url 'product_detail' prod.id %}" class="image">
+                                                                <img src="{{prod.image.url}}" alt="Product" />
+                                                                <img class="hover-image" src="{{prod.image.url}}" alt="Product" />
                                                             </a>
                                                         </div>
                                                         <div class="content">
@@ -73,7 +73,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="actions">
-                                                            <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                            <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart-{{forloop.counter}}"><i
                                                                 class="pe-7s-shopbag"></i></button>
                                                             <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
                                                                     class="pe-7s-like"></i></button>
