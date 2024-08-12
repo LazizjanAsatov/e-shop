@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'E_shop.urls'
@@ -126,11 +127,11 @@ STATICROOT=os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'lazizjannsl12@gmail.com'
-EMAIL_HOST_PASSWORD = 'L@zizjon12'
+EMAIL_HOST_USER = '**************@gmail.com'
+EMAIL_HOST_PASSWORD = '********'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

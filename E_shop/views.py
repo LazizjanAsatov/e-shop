@@ -91,11 +91,11 @@ def CONTACT_Page(request):
         subject=request.POST.get('subject')
         message=request.POST.get('message')
 
-        contact=Contact_Us(name=name,email=email,subject=subject,message=message)
-       
+        contact=Contact_Us(name=name,email=email,subject=subject,message=message)       
         subject=subject
         message=message
         email_from=settings.EMAIL_HOST_USER
+        contact.save()
         try:
             send_mail(subject,message,email_from,['lazizjannsl12@gmail.com'])
             contact.save()
@@ -138,8 +138,7 @@ def HandleLogin(request):
 
 def HandleLogout(request):
     logout(request)
-
-    return render('home')
+    return redirect('home')
 
 @login_required(login_url="/login/")
 def cart_add(request, id):

@@ -58,9 +58,9 @@
                                                         <span class="new">{{prod.condition}}</span>
                                                         </span>
                                                         <div class="thumb">
-                                                            <a href="single-product.html" class="image">
-                                                                <img src="/{{prod.image}}" alt="Product" />
-                                                                <img class="hover-image" src="/{{prod.image.url}}" alt="Product" />
+                                                            <a href="{% url 'product_detail' prod.id %}" class="image">
+                                                                <img src="{{prod.image.url}}" alt="Product" />
+                                                                <img class="hover-image" src="{{prod.image.url}}" alt="Product" />
                                                             </a>
                                                         </div>
                                                         <div class="content">
@@ -99,8 +99,9 @@
                                                         <div class="product">
                                                             <div class="thumb">
                                                                 <a href="single-product.html" class="image">
-                                                                    <img src="/{{prod.image}}" alt="Product" />
-                                                                    <img class="hover-image" src="/{{prod.image}}" alt="Product" />
+                                                                    <img src="{{prod.image.url}}" alt="Product" />
+                                                                    
+                                                                    <img class="hover-image" src="{{prod.image.url}}" alt="Product" />
                                                                 </a>
                                                                 <span class="badges">
                                                                 <span class="new">{{prod.condition}}</span>

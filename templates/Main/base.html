@@ -48,8 +48,8 @@
                         <div class="col d-none d-lg-block">
                             <div class="top-nav">
                                 <ul>
-                                    <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +012 3456 789</a></li>
-                                    <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
+                                    <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +998 88 8517775</a></li>
+                                    <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> L@example.com</a></li>
                                     <li><a href="my-account.html"><i class="fa fa-user"></i> Account</a></li>
                                     {% if user.is_authenticated %}
                                     <li><a href="{% url 'logout' %}"><i class="fa fa-unlock"></i> Logout</a></li>
@@ -70,7 +70,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-lg-3 col">
                             <div class="header-logo">
-                                <a href="index.html"><img src="{% static 'assets/images/logo/logo.png'%}" alt="Site Logo" /></a>
+                                <a href="{% url 'home' %}"><img src="{% static 'assets/images/logo/logo.png'%}" alt="Site Logo" /></a>
                             </div>
                         </div>
                         <div class="col-lg-6 d-none d-lg-block">
@@ -108,7 +108,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-lg-3 col">
                             <div class="header-logo">
-                                <a href="index.html"><img src="{% static 'assets/images/logo/logo.png' %}" alt="Site Logo" /></a>
+                                <a href="{% url 'home' %}   "><img src="{% static 'assets/images/logo/logo.png' %}" alt="Site Logo" /></a>
                             </div>
                         </div>
                         <div class="col-lg-6 d-none d-lg-block">
